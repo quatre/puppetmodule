@@ -26,6 +26,7 @@
 #  ['pluginsync']               - Enable plugin sync
 #  ['parser']                   - Which parser to use
 #  ['puppetdb_startup_timeout'] - The timeout for puppetdb
+#  ['ca']                       - Whether the master should function as a certificate authority
 #
 # Requires:
 #
@@ -70,7 +71,8 @@ class puppet::master (
   $pluginsync                 = true,
   $parser                     = $::puppet::params::parser,
   $puppetdb_startup_timeout   = '60',
-  $puppetdb_strict_validation = $::puppet::params::puppetdb_strict_validation
+  $ca                         = $::puppet::params::ca,
+  $puppetdb_strict_validation = $::puppet::params::puppetdb_strict_validation,
 ) inherits puppet::params {
 
   anchor { 'puppet::master::begin': }
@@ -241,6 +243,14 @@ class puppet::master (
       ensure  => present,
       setting => 'reporturl',
       value   => $reporturl,
+    }
+  }
+
+  if $ca != undef{
+    ini_setting {'puppetmasterca':
+      ensure  => present,
+      setting => 'ca',
+      value   => $ca,
     }
   }
 

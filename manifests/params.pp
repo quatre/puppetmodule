@@ -29,6 +29,7 @@ class puppet::params {
   $apache_serveradmin               = 'root'
   $parser                           = 'current'
   $puppetdb_strict_validation       = true
+  $ca                               = undef
 
   case $::osfamily {
     RedHat: {

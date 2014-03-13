@@ -21,8 +21,8 @@ describe 'puppet::master', :type => :class do
                 :autosign               => 'true',
                 :certname               => 'test.example.com',
                 :storeconfigs           => 'true',
-                :storeconfigs_dbserver  => 'test.example.com'
-
+                :storeconfigs_dbserver  => 'test.example.com',
+                :ca                     => 'false'
             }
         end
         it {
@@ -128,6 +128,12 @@ describe 'puppet::master', :type => :class do
                 :path    => '/etc/puppet/puppet.conf',
                 :value   => 'true'
             )
+            should contain_ini_setting('puppetmasterca').with(
+                :ensure  => 'present',
+                :section => 'master',
+                :setting => 'ca',
+                :value   => 'false'
+            )
             should contain_anchor('puppet::master::begin').with_before(
               ['Class[Puppet::Passenger]', 'Class[Puppet::Storeconfigs]']
             )
@@ -154,7 +160,8 @@ describe 'puppet::master', :type => :class do
                 :autosign               => 'true',
                 :certname               => 'test.example.com',
                 :storeconfigs           => 'true',
-                :storeconfigs_dbserver  => 'test.example.com'
+                :storeconfigs_dbserver  => 'test.example.com',
+                :ca                     => 'false'
 
             }
         end
@@ -259,6 +266,12 @@ describe 'puppet::master', :type => :class do
                 :setting => 'pluginsync',
                 :path    => '/etc/puppet/puppet.conf',
                 :value   => 'true'
+            )
+            should contain_ini_setting('puppetmasterca').with(
+                :ensure  => 'present',
+                :section => 'master',
+                :setting => 'ca',
+                :value   => 'false'
             )
             should contain_anchor('puppet::master::begin').with_before(
               ['Class[Puppet::Passenger]', 'Class[Puppet::Storeconfigs]']
