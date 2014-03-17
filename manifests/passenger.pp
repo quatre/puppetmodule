@@ -12,7 +12,7 @@
 #   [conf_dir]                   - The configuration directory of the puppet install
 #   [ssl_cert]                   - The host's certificate
 #   [ssl_key]                    - The host's private key
-#   [ssl_chain]                  - 
+#   [ssl_chain]                  - SSL Chain
 #   [ssl_ca]                     - The CA certificate
 #   [ssl_crl]                    - The certificate revocation list (CRL) for the CA
 #   [ca]                         - Wether or not the server is a CA
