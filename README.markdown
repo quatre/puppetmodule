@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/stephenrjohnson/puppetmodule.png)](https://travis-ci.org/stephenrjohnson/puppetmodule)
+[![Build Status](https://travis-ci.org/quatre/puppetmodule.png?branch=master)](https://travis-ci.org/quatre/puppetmodule)
 # Puppet module #
 
 This module provides classes for managing the puppet agent and puppet master. 
