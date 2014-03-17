@@ -29,7 +29,7 @@
 #  ['ca']                       - Whether the master should function as a certificate authority
 #  [ssl_cert]                   - The host's certificate
 #  [ssl_key]                    - The host's private key
-#  [ssl_chain]                  - 
+#  [ssl_chain]                  - SSL Chain
 #  [ssl_ca]                     - The CA certificate
 #  [ssl_crl]                    - The certificate revocation list (CRL) for the CA
 #  [ca]                         - Wether or not the server is a CA
@@ -83,7 +83,7 @@ class puppet::master (
   $ssl_key                    = "${puppet_ssldir}/private_keys/${certname}.pem",
   $ssl_chain                  = "${puppet_ssldir}/ca/ca_crt.pem",
   $ssl_ca                     = "${puppet_ssldir}/ca/ca_crt.pem",
-  $ssl_crl                    = "${puppet_ssldir}/ca/ca_crl.pem", 
+  $ssl_crl                    = "${puppet_ssldir}/ca/ca_crl.pem",
 ) inherits puppet::params {
 
   anchor { 'puppet::master::begin': }
