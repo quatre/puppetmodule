@@ -10,6 +10,7 @@ describe 'puppet::passenger', :type => :class do
                 :puppet_ssldir          => '/var/lib/puppet/ssl',
                 :certname               => 'test.test.com',
                 :conf_dir               => '/etc/puppet',
+                :ssl_ca                 => '/var/lib/puppet/ssl/ca.pem',
         }
         end
     context 'on Debian' do
@@ -69,6 +70,10 @@ describe 'puppet::passenger', :type => :class do
                     :path    => params[:puppet_conf],
                     :value   =>'SSL_CLIENT_VERIFY',
                     :require => "File[#{params[:puppet_conf]}]"
+                )
+                should contain_apache__vhost('puppet-test.test.com').with(
+                    :ssl_ca  => '/var/lib/puppet/ssl/ca.pem',
+                    :ssl_key => '/var/lib/puppet/ssl/private_keys/test.test.com.pem',
                 )
         }
     end
