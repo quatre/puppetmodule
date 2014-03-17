@@ -66,7 +66,7 @@ class puppet::passenger(
         mode   => '0770',
         before => Exec['Certificate_Check'],
       }
-  
+
       file{"${puppet_ssldir}/ca/requests":
         ensure => directory,
         owner  => $::puppet::params::puppet_user,
