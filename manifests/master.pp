@@ -27,6 +27,12 @@
 #  ['parser']                   - Which parser to use
 #  ['puppetdb_startup_timeout'] - The timeout for puppetdb
 #  ['ca']                       - Whether the master should function as a certificate authority
+#  [ssl_cert]                   - The host's certificate
+#  [ssl_key]                    - The host's private key
+#  [ssl_chain]                  - 
+#  [ssl_ca]                     - The CA certificate
+#  [ssl_crl]                    - The certificate revocation list (CRL) for the CA
+#  [ca]                         - Wether or not the server is a CA
 #
 # Requires:
 #
@@ -73,6 +79,11 @@ class puppet::master (
   $puppetdb_startup_timeout   = '60',
   $ca                         = $::puppet::params::ca,
   $puppetdb_strict_validation = $::puppet::params::puppetdb_strict_validation,
+  $ssl_cert                   = "${puppet_ssldir}/certs/${certname}.pem",
+  $ssl_key                    = "${puppet_ssldir}/private_keys/${certname}.pem",
+  $ssl_chain                  = "${puppet_ssldir}/ca/ca_crt.pem",
+  $ssl_ca                     = "${puppet_ssldir}/ca/ca_crt.pem",
+  $ssl_crl                    = "${puppet_ssldir}/ca/ca_crl.pem", 
 ) inherits puppet::params {
 
   anchor { 'puppet::master::begin': }
@@ -118,6 +129,12 @@ class puppet::master (
     puppet_ssldir          => $::puppet::params::puppet_ssldir,
     certname               => $certname,
     conf_dir               => $::puppet::params::confdir,
+    ca                     => $ca,
+    ssl_cert               => $ssl_cert,
+    ssl_key                => $ssl_key,
+    ssl_chain              => $ssl_chain,
+    ssl_ca                 => $ssl_ca,
+    ssl_crl                => $ssl_crl,
   } ->
   Anchor['puppet::master::end']
 
